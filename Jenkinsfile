@@ -1,9 +1,9 @@
 pipeline{
     agent any
     stages{
-        stage('test echo2'){
+        stage('test build'){
             steps{
-                sh 'sh test.sh'
+                sh 'docker build -t test:latest .'
             }
         }
     }
