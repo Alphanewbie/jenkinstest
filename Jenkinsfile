@@ -23,7 +23,7 @@ pipeline{
                     sh 'ssh -o StrictHostKeyChecking=no -l azureuser 52.231.76.110 uname -a'
                     script{
                         withCredentials([usernamePassword( credentialsId: 'cwleeazurecr', usernameVariable: 'USER', passwordVariable: 'PASSWORD')]) {
-                            sh 'ssh azureuser@52.231.76.110 "sudo docker login -u $USER -p $PASSWORD $AZURECR"'
+                            sh 'ssh azureuser@52.231.76.110 "sudo docker login -u $USER -p $PASSWORD cwleecr.azurecr.io"'
                         }
                     }
                     // sh 'ssh azureuser@52.231.76.110 "cd cicd_test && git pull"'
