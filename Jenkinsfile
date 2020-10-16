@@ -28,7 +28,7 @@ pipeline{
                     }
                     // sh 'ssh azureuser@52.231.76.110 "cd cicd_test && git pull"'
                     sh 'ssh azureuser@52.231.76.110 "sudo docker pull cwleecr.azurecr.io/test:latest"'
-                    sh 'ssh azureuser@52.231.76.110 "sudo docker run -p 8000:8000 cwleecr.azurecr.io/test:latest -D"'
+                    sh 'ssh azureuser@52.231.76.110 "sudo docker run -p 8000:8000 -d cwleecr.azurecr.io/test:latest"'
                     // sh 'ssh azureuser@52.231.76.110 "cd cicd_test && sudo docker-compose up --build -d"'
                 }
             }
