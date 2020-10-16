@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('test echo'){
             steps{
-                sh 'cd jenkinstest && test.sh'
+                sh 'ls && test.sh'
             }
         }
     }
