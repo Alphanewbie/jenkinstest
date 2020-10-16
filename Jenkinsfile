@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('test echo2'){
             steps{
-                sh 'sudo ./test.sh'
+                sh 'sudo test.sh'
             }
         }
     }
