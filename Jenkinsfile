@@ -17,5 +17,21 @@ pipeline{
                 }
             }
         }
+        stage('ssh deploy') {
+            steps{
+                sshagent (credentials: ['SSH_private_key']) {
+                    sh 'ssh -o StrictHostKeyChecking=no -l azureuser 52.231.76.110 uname -a'
+                    script{
+                        withCredentials([usernamePassword( credentialsId: 'cwleeazurecr', usernameVariable: 'USER', passwordVariable: 'PASSWORD')]) {
+                            sh 'ssh azureuser@52.231.76.110 "sudo docker login -u $USER -p $PASSWORD $AZURECR"'
+                        }
+                    }
+                    // sh 'ssh azureuser@52.231.76.110 "cd cicd_test && git pull"'
+                    sh 'ssh azureuser@52.231.76.110 "sudo docker pull cwleecr.azurecr.io/test:latest"'
+                    sh 'ssh azureuser@52.231.76.110 "sudo docker run -p 8000:8000 cwleecr.azurecr.io/test:latest"'
+                    // sh 'ssh azureuser@52.231.76.110 "cd cicd_test && sudo docker-compose up --build -d"'
+                }
+            }
+        }
     }
 }
